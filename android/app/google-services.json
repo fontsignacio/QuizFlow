@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "549127138761",
+    "project_id": "quizflow-788a0",
+    "storage_bucket": "quizflow-788a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549127138761:android:668c736eec4c65f97f4c18",
+        "android_client_info": {
+          "package_name": "com.ignacio.quiz_flow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549127138761-sqgroau30bggcu44arbkq07oejs5hbma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvm5Xd3O_FGXv-Yq6IUaA52SUEzXBnFIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549127138761-sqgroau30bggcu44arbkq07oejs5hbma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
