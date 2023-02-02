@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flow/Services/firebase_service.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,9 +15,25 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text("QuizFlow"),
       ),
-      body:  const  Center(
-        child: Text("Hello World", style: TextStyle(color: Colors.white)),
-      ),
+      body: FutureBuilder(
+        future: getUser(),
+        builder: ((context, snapshot) {
+          if(snapshot.hasData){
+            return ListView.builder(
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return Text(snapshot.data?[index]['name'],
+                  style: const TextStyle(color:  Colors.white),
+                );
+              },
+            );
+          }else{
+            return const Center(
+              child:  CircularProgressIndicator(),
+            );
+          }
+        })
+      )
     );
   }
 }
