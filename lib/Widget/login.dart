@@ -14,9 +14,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("QuizFlow"),
-      ),
       body:Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
@@ -24,20 +21,30 @@ class _LoginState extends State<Login> {
             Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'TutorialKart',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 200,
+                  scale: 0.5,
+              )
+            ),
             Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Sign in',
-                  style: TextStyle(fontSize: 20),
-                )),
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              child: const Text('Sign in',
+                style: TextStyle(
+                  fontSize: 20
+                )
+              ),             
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: const Text('Use your Google Account',
+                style: TextStyle(
+                  fontSize: 15, 
+                  color: Colors.black54
+                ),  
+              )      
+            ),
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
