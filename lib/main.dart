@@ -15,9 +15,9 @@ void main() async {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       colorScheme: ColorScheme.fromSwatch().copyWith(
-        primary: const Color.fromARGB(255, 29, 15, 29),
+        primary: const Color.fromARGB(255, 61, 189, 78),
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: const Color.fromARGB(255, 219, 233, 246),
     ),
     home: const Login(),
   ));

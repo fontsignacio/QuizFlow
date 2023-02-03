@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_flow/Widgets/category_page.dart';
 
+
 class Difficulty extends StatelessWidget {
   const Difficulty({super.key});
 
@@ -24,16 +25,24 @@ class Difficulty extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: const Text('QuizFlow',
+              child: const Text('QuizFlow', 
                 style: TextStyle(
+                  shadows: [
+                    Shadow(
+                      offset: Offset(3.0, 3.0),
+                      blurRadius: 10,
+                      color: Colors.white,
+                    ),
+                  ],
                   fontSize: 50,
-                  color: Colors.white
+                  color: Colors.blueGrey
                 )
               ),             
             ),
+            const SizedBox(height: 20),
             Container(
               height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 child: const Text('Easy'),
                 onPressed: () {
@@ -43,9 +52,10 @@ class Difficulty extends StatelessWidget {
                 },
               )
             ),
+            const SizedBox(height: 20),
             Container(
               height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 child: const Text('Medium'),
                 onPressed: () {
@@ -55,9 +65,10 @@ class Difficulty extends StatelessWidget {
                 },
               )
             ),
+            const SizedBox(height: 20),
             Container(
               height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 child: const Text('Hard'),
                 onPressed: () {

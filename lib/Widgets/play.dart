@@ -27,14 +27,22 @@ class Play extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: const Text('QuizFlow',
                 style: TextStyle(
+                  shadows: [
+                    Shadow(
+                      offset: Offset(3.0, 3.0),
+                      blurRadius: 10,
+                      color: Colors.white,
+                    ),
+                  ],
                   fontSize: 50,
-                  color: Colors.white
+                  color: Colors.blueGrey
                 )
               ),             
             ),
+            const SizedBox(height: 20),
             Container(
               height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 child: const Text('Play',
                   style: TextStyle(
@@ -48,7 +56,8 @@ class Play extends StatelessWidget {
                 },
               )
             ),
-            Container(
+            const SizedBox(height: 20),
+            Container(                   
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(

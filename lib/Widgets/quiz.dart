@@ -14,7 +14,7 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   var currentQuestionIndex = 0;
-  int seconds = 60;
+  int seconds = 30;
   Timer? timer;
   late Future quiz;
 
@@ -72,7 +72,7 @@ class _QuizScreenState extends State<QuizScreen> {
     currentQuestionIndex++;
     resetColors();
     timer!.cancel();
-    seconds = 60;
+    seconds = 30;
     startTimer();
   }
 
@@ -81,16 +81,17 @@ class _QuizScreenState extends State<QuizScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: const EdgeInsets.all(12),
-        decoration: const BoxDecoration(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: const EdgeInsets.all(12),
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.blue, Colors.blueGrey],
-        )),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color.fromARGB(255, 15, 15, 29), Color.fromARGB(255, 76, 61, 189)],
+          )
+        ),
         child: FutureBuilder(
           future: quiz,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -135,40 +136,24 @@ class _QuizScreenState extends State<QuizScreen> {
                               ),
                             ),
                             SizedBox(
-                              width: 80,
-                              height: 80,
+                              width: 60,
+                              height: 60,
                               child: CircularProgressIndicator(
-                                value: seconds / 60,
+                                value: seconds / 30,
                                 valueColor: const AlwaysStoppedAnimation(Colors.white),
                               ),
                             ),
                           ],
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.lightGreen, width: 2),
-                          ),
-                          child: TextButton.icon(
-                            onPressed: null,
-                            icon: const Icon(CupertinoIcons.heart_fill, color: Colors.white, size: 18),
-                            label: const Text("Like",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14
-                              ),
-                            )
-                          )
-                        ),
                       ],
                     ),
                     const SizedBox(height: 20),
                     Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: Alignment.center,
                       child: Text("Question ${currentQuestionIndex + 1} of ${data.length}",
                         style: const TextStyle(
                           color: Colors.lightGreen,
-                          fontSize: 18
+                          fontSize: 25
                         ),
                       ),
                     ),
@@ -217,7 +202,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             ),
                             child: Text(optionsList[index].toString(),
                               style: const TextStyle(
-                                color: Colors.blue,
+                                color: Colors.black,
                                 fontSize: 18
                               ),
                             ),

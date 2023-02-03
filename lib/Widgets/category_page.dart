@@ -16,24 +16,24 @@ class _HomeState extends State<CategoryPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 15, 15, 29),
       appBar: AppBar(
+        backgroundColor:const  Color.fromARGB(255, 84, 81, 123),
         title: const Text("QuizFlow"),
+        shadowColor: Colors.white,
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      body: GridView.builder( 
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(  
           crossAxisCount: 2,
-        ),
+        ),  
         itemCount: categories.length,
         itemBuilder: (context, index) {
           int count = index + 9;
           return Container(
             margin: const EdgeInsets.all(15),
-            height: 40,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             child: ElevatedButton(
               child: Text(categories[index], 
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20
+                  fontSize: 18
                 ),
               ), 
               onPressed: () {
