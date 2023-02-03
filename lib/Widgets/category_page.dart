@@ -23,25 +23,21 @@ class _HomeState extends State<CategoryPage> {
         ),
         itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            height: 60,
-            child: GestureDetector(
-              child: Padding(
-                padding: const  EdgeInsets.only(left: 10),
-                child: Text(categories[index], 
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20
-                  ),
-                ) 
-              ),
-              onTap: () {/*
-                var router = MaterialPageRoute(
-                builder: (context) => CategoryPage(genre: genre[index].toString()));
-                Navigator.of(context).push(router);*/
-              }
+          return Container(
+            margin: const EdgeInsets.all(15),
+            height: 40,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+            child: ElevatedButton(
+              child: Text(categories[index], 
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20
+                ),
+              ), 
+              onPressed: () {
+              },
             )
-            );
+          );
         },
       ),
     );
