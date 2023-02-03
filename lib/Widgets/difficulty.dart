@@ -59,10 +59,10 @@ class Difficulty extends StatelessWidget {
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               child: ElevatedButton(
-                child: const Text('Difficult'),
+                child: const Text('Hard'),
                 onPressed: () {
                   var router = MaterialPageRoute(
-                  builder: (context) => const CategoryPage(difficulty: 'difficult'));
+                  builder: (context) => const CategoryPage(difficulty: 'hard'));
                   Navigator.of(context).push(router);
                 },
               )

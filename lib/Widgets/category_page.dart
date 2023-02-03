@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flow/Widgets/quiz.dart';
 import 'package:quiz_flow/api/util.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -22,7 +23,8 @@ class _HomeState extends State<CategoryPage> {
           crossAxisCount: 2,
         ),
         itemCount: categories.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
+          int count = index + 9;
           return Container(
             margin: const EdgeInsets.all(15),
             height: 40,
@@ -35,6 +37,10 @@ class _HomeState extends State<CategoryPage> {
                 ),
               ), 
               onPressed: () {
+                var router = MaterialPageRoute(
+                builder: (context) => QuizScreen(difficulty: widget.difficulty, category: '$count'));
+                Navigator.of(context).push(router);
+                count = 0;
               },
             )
           );
