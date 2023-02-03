@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Widget/login.dart';
+import 'package:quiz_flow/Widgets/login.dart';
 //import 'package:quiz_flow/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

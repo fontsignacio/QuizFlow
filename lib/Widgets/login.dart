@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_flow/Widgets/play.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -78,7 +79,9 @@ class _LoginState extends State<Login> {
                 child: ElevatedButton(
                   child: const Text('Login'),
                   onPressed: () {
-                    
+                    var router = MaterialPageRoute(
+                    builder: (context) => const Play());
+                    Navigator.of(context).push(router);
                   },
                 )
             ),
