@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Widgets/login.dart';
-//import 'package:quiz_flow/home.dart';
+import 'package:quiz_flow/Pages/login.dart';
+import 'package:quiz_flow/Pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:quiz_flow/Services/auth.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -19,6 +20,15 @@ void main() async {
       ),
       scaffoldBackgroundColor: const Color.fromARGB(255, 219, 233, 246),
     ),
-    home: const Login(),
+    home: StreamBuilder(
+      stream: Auth().authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Home();
+        } else {
+          return const Login();
+        }
+      },
+    )
   ));
 }

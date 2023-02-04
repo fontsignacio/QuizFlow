@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Widgets/category_page.dart';
+import 'package:quiz_flow/Pages/difficulty.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quiz_flow/Services/auth.dart';
 
+class Home extends StatelessWidget {
+  Home({super.key});
+  
+  final User? user = Auth().currentUser;
 
-class Difficulty extends StatelessWidget {
-  const Difficulty({super.key});
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class Difficulty extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: const Text('QuizFlow', 
+              child: const Text('QuizFlow',
                 style: TextStyle(
                   shadows: [
                     Shadow(
@@ -44,40 +52,31 @@ class Difficulty extends StatelessWidget {
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
-                child: const Text('Easy'),
+                child: const Text('Play',
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
                 onPressed: () {
                   var router = MaterialPageRoute(
-                  builder: (context) => const CategoryPage(difficulty: 'easy'));
+                  builder: (context) => const Difficulty());
                   Navigator.of(context).push(router);
                 },
               )
             ),
             const SizedBox(height: 20),
-            Container(
+            Container(                   
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
-                child: const Text('Medium'),
-                onPressed: () {
-                  var router = MaterialPageRoute(
-                  builder: (context) => const CategoryPage(difficulty: 'medium'));
-                  Navigator.of(context).push(router);
-                },
+                onPressed: signOut,
+                child: const Text('Logout',
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
               )
             ),
-            const SizedBox(height: 20),
-            Container(
-              height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: ElevatedButton(
-                child: const Text('Hard'),
-                onPressed: () {
-                  var router = MaterialPageRoute(
-                  builder: (context) => const CategoryPage(difficulty: 'hard'));
-                  Navigator.of(context).push(router);
-                },
-              )
-            )
           ],
         )
       )

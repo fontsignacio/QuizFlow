@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Widgets/quiz.dart';
+import 'package:quiz_flow/Pages/quiz.dart';
 import 'package:quiz_flow/api/util.dart';
 
 class CategoryPage extends StatefulWidget {

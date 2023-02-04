@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Widgets/play.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quiz_flow/Services/auth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,8 +10,37 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController nameController = TextEditingController();
+  String? errorMessage = '';
+  bool isLogin = true;
+
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      await Auth().signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
+
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      await Auth().createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
  
   @override
   Widget build(BuildContext context) {
@@ -39,7 +69,7 @@ class _LoginState extends State<Login> {
             ),
             Container(
               alignment: Alignment.center,
-              child: const Text('Use your Google Account',
+              child: const Text('Use your QuizFlow Account',
                 style: TextStyle(
                   fontSize: 15, 
                   color: Colors.black54
@@ -49,10 +79,10 @@ class _LoginState extends State<Login> {
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
-                controller: nameController,
+                controller: emailController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'User Name',
+                  labelText: 'Email ',
                 ),
               ),
             ),
@@ -67,36 +97,30 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
-              child: const Text('Forgot Password',),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Text(errorMessage == '' ? '' : 'Humm ? $errorMessage'),
             ),
             Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    var router = MaterialPageRoute(
-                    builder: (context) => const Play());
-                    Navigator.of(context).push(router);
-                  },
+                  onPressed:
+                      isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,  
+                  child: Text(isLogin ? 'Login' : 'Register'),  
                 )
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text('Does not have account?'),
+                Text(isLogin ? 'Does not have account?' : 'Do you have account?'),
                 TextButton(
-                  child: const Text(
-                    'Sign in',
-                    style: TextStyle(fontSize: 20),
-                  ),
                   onPressed: () {
-                    //signup screen
+                    setState(() {
+                      isLogin = !isLogin;
+                    });
                   },
+                  child: Text(isLogin ? 'Sing in' : 'Login'),
                 )
               ],
             ),
