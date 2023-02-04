@@ -25,11 +25,11 @@ class _QuizScreenState extends State<QuizScreen> {
   var optionsList = [];
 
   var optionsColor = [
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
+    Colors.black26,
+    Colors.black38,
+    Colors.black38,
+    Colors.black38,
+    Colors.black38,
   ];
 
   @override
@@ -47,11 +47,11 @@ class _QuizScreenState extends State<QuizScreen> {
 
   resetColors() {
     optionsColor = [
-      Colors.white,
-      Colors.white,
-      Colors.white,
-      Colors.white,
-      Colors.white,
+      Colors.black38,
+      Colors.black38,
+      Colors.black38,
+      Colors.black38,
+      Colors.black38,
     ];
   }
 
@@ -158,10 +158,22 @@ class _QuizScreenState extends State<QuizScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Text(data[currentQuestionIndex]["question"],
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Card(
+                        color: Colors.black38,
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
+                          height: 140,
+                          child: Text(data[currentQuestionIndex]["question"],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20
+                            ),
+                          ),
+                        )
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -170,8 +182,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       itemCount: optionsList.length,
                       itemBuilder: (BuildContext context, int index) {
                         var answer = data[currentQuestionIndex]["correct_answer"];
-
-                        return GestureDetector(
+                        return GestureDetector( 
                           onTap: () {
                             setState(() {
                               if (answer.toString() == optionsList[index].toString()) {
@@ -180,7 +191,6 @@ class _QuizScreenState extends State<QuizScreen> {
                               } else {
                                 optionsColor[index] = Colors.red;
                               }
-
                               if (currentQuestionIndex < data.length - 1) {
                                 Future.delayed(const Duration(seconds: 1), () {
                                   gotoNextQuestion();
@@ -202,7 +212,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             ),
                             child: Text(optionsList[index].toString(),
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 18
                               ),
                             ),

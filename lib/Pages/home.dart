@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 15, 15, 29),
       body:Padding(
         padding: const EdgeInsets.all(10),
-        child: ListView(
+        child: ListView( 
           children: <Widget>[
             Container(
                 alignment: Alignment.center,
@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
                 style: TextStyle(
                   shadows: [
                     Shadow(
-                      offset: Offset(3.0, 3.0),
+                      offset: Offset(2.0, 2.0),
                       blurRadius: 10,
                       color: Colors.white,
                     ),

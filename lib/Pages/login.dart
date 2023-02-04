@@ -99,7 +99,12 @@ class _LoginState extends State<Login> {
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: Text(errorMessage == '' ? '' : 'Humm ? $errorMessage'),
+              child: Text(errorMessage == '' ? '' : 'Humm ? $errorMessage',
+                style: const TextStyle(
+                  fontSize: 15, 
+                  color: Colors.black54
+                ),
+              ),
             ),
             Container(
                 height: 50,
