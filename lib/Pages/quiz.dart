@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:quiz_flow/api/http_handler.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -25,11 +24,11 @@ class _QuizScreenState extends State<QuizScreen> {
   var optionsList = [];
 
   var optionsColor = [
-    Colors.black26,
-    Colors.black38,
-    Colors.black38,
-    Colors.black38,
-    Colors.black38,
+    Colors.black54,
+    Colors.black54,
+    Colors.black54,
+    Colors.black54,
+    Colors.black54,
   ];
 
   @override
@@ -47,11 +46,11 @@ class _QuizScreenState extends State<QuizScreen> {
 
   resetColors() {
     optionsColor = [
-      Colors.black38,
-      Colors.black38,
-      Colors.black38,
-      Colors.black38,
-      Colors.black38,
+      Colors.black54,
+      Colors.black54,
+      Colors.black54,
+      Colors.black54,
+      Colors.black54,
     ];
   }
 
@@ -111,33 +110,27 @@ class _QuizScreenState extends State<QuizScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: Colors.lightGreen, width: 2),
-                          ),
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(
-                                CupertinoIcons.xmark,
-                                color: Colors.white,
-                                size: 28,
-                              )),
-                        ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 30,
+                            )),
                         Stack(
                           alignment: Alignment.center,
                           children: [
                             Text("$seconds", 
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 26,
                               ),
                             ),
                             SizedBox(
-                              width: 60,
-                              height: 60,
+                              width: 50,
+                              height: 50,
                               child: CircularProgressIndicator(
                                 value: seconds / 30,
                                 valueColor: const AlwaysStoppedAnimation(Colors.white),
@@ -161,7 +154,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: Card(
-                        color: Colors.black38,
+                        color: const Color.fromARGB(255, 52, 51, 51),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           margin: const EdgeInsets.all(10),

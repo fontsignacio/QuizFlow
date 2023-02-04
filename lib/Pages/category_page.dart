@@ -1,29 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Pages/quiz.dart';
+import 'package:quiz_flow/Pages/difficulty.dart';
+import 'package:quiz_flow/Pages/profile.dart';
 import 'package:quiz_flow/api/util.dart';
 import 'package:quiz_flow/Models/category_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quiz_flow/Services/auth.dart';
+
+enum MenuItem {item1,item2}
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({super.key, required this.difficulty});
-  final String difficulty;
+  const CategoryPage({super.key});
 
   @override
   State<CategoryPage> createState() => _HomeState();
 }
 
 class _HomeState extends State<CategoryPage> {
+
+  final User? user = Auth().currentUser;
+
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 15, 15, 29),
       appBar: AppBar(
-        backgroundColor:const  Color.fromARGB(255, 84, 81, 123),
-        title: const Text("QuizFlow"),
+        backgroundColor:const  Color.fromARGB(255, 76, 61, 189),
+        title: Row(
+          children: [
+            Image.asset('assets/images/logo.png',
+              height: 40,
+              scale: 0.5,
+            ),
+            Container(
+              alignment: Alignment.bottomLeft,
+              child: const Text(" QuizFlow",
+              style: TextStyle(
+                fontSize: 25
+              )
+            ) ,
+            ) 
+          ],
+        ),
         shadowColor: Colors.white,
         actions: [
           Padding(      
             padding: const EdgeInsets.only(right: 10),
             child: PopupMenuButton <MenuItem> (
+               onSelected: (value) => {
+                if(value == MenuItem.item1){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Profile(),
+                  )),
+                } else if(value == MenuItem.item2) signOut() 
+              },
               iconSize: 40,
               color: const Color(0xff292b37),
               icon: CircleAvatar(
@@ -35,30 +69,32 @@ class _HomeState extends State<CategoryPage> {
               ),
               itemBuilder: (context) =>  [
                 PopupMenuItem(
+                  value:  MenuItem.item1,
                   child: Stack(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 10),                          
+                        padding: const EdgeInsets.only(left: 35, top: 10),                          
                         child: CircleAvatar(  
                         radius: 60,                
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100), 
-                          child: const Icon(Icons.person),
+                          child: const Icon(Icons.person, size: 60,),
                         ),
                       ),
                       ),
-                      /*const Padding(
-                        padding: EdgeInsets.only(top: 140, left: 20),
-                        child: Text("fontsignacio", 
-                          style: TextStyle(
+                      Padding(
+                        padding: const EdgeInsets.only(top: 140, left: 20, bottom: 20),
+                        child: Text(user?.email ?? '', 
+                          style: const TextStyle(
                             color: Colors.white
                           )
                         ),
-                      ),*/
+                      ),
                     ],
                   )
                 ),      
                 PopupMenuItem(
+                  value:  MenuItem.item2,
                   child: Row(
                     children: const [
                       Icon(Icons.logout, size: 20,),
@@ -106,15 +142,15 @@ class _HomeState extends State<CategoryPage> {
                       ),
                     )
                   ),    
-                  Container(
+                  Container(   
                     alignment: Alignment.center,
                     height: 32,
                     child: Card(
                       color: Colors.black38,
-                      child: Text(categories[index], 
+                      child: Text('  ${categories[index]}  ', 
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 18
+                          fontSize: 17
                         ),
                       ),
                     )
@@ -123,7 +159,7 @@ class _HomeState extends State<CategoryPage> {
               ),
               onTap: () {
                 var router = MaterialPageRoute(
-                builder: (context) => QuizScreen(difficulty: widget.difficulty, category: '$count'));
+                builder: (context) => Difficulty(category: '$count'));
                 Navigator.of(context).push(router);
               },
             )

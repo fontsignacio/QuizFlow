@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class CategoryModel{
   CategoryModel({required this.imgUrl});
   final String imgUrl;
