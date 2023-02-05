@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quiz_flow/Services/auth.dart';
+import 'package:quiz_flow/Services/firebase_services.dart';
 
 class Profile extends StatelessWidget {
   Profile({super.key});
@@ -11,9 +12,8 @@ class Profile extends StatelessWidget {
     await Auth().signOut();
   }
 
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 15, 15, 29),
       body: Padding(
@@ -41,7 +41,6 @@ class Profile extends StatelessWidget {
                     size: 30,
                   )
                 ),
-
               ],
             ),
             CircleAvatar(
@@ -79,42 +78,59 @@ class Profile extends StatelessWidget {
               ),
             ),
             const Divider(height: 20, color: Colors.white,),
-            Container(
-              padding: const EdgeInsets.only(left: 30),
-              alignment: Alignment.topLeft,
-              child: const Text("Points: ", 
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-                )
-              ),
-            ),
-            const Divider(height: 25, color: Colors.white54,),
-            Container(
-              padding: const EdgeInsets.only(left: 30),
-              alignment: Alignment.topLeft,
-              child: const Text("Hits: ", 
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-                )
-              ),
-            ),
-            const Divider(height: 25, color: Colors.white54),
-            Container(
-              padding: const EdgeInsets.only(left: 30),
-              alignment: Alignment.topLeft,
-              child: const Text("Fails: ", 
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-                )
-              ),
-            ),
-            const Divider(height: 25, color: Colors.white,),
+            FutureBuilder(
+              future: FireStoreDataBase().getData(),
+              builder: ((context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Text("Something went wrong");
+                }
+                if (snapshot.connectionState == ConnectionState.done) {
+                  List? dataList = snapshot.data;
+                  return buildItems(dataList);
+                }
+                return const Center(child: CircularProgressIndicator());
+              }),       
+            )
           ],
         ),
-      ),
+      )
+    ); 
+  }
+
+  Widget buildItems(dataList){
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          child: Text("Points:   ${dataList?[0]['points']}", 
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.lightGreen
+            )
+          ),
+        ),
+        const Divider(height: 25, color: Colors.white54,),
+        Container(
+          alignment: Alignment.center,
+          child: Text("Hits:   ${dataList?[0]['hits']}", 
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white
+            )
+          ),
+        ),
+        const Divider(height: 25, color: Colors.white54),
+        Container(
+          alignment: Alignment.center,
+          child: Text("Fails:   ${dataList?[0]['fails']}", 
+            style:const  TextStyle(
+              fontSize: 20,
+              color: Colors.red
+            )
+          ),
+        ),
+        const Divider(height: 25, color: Colors.white,),
+      ]
     );
   }
 }

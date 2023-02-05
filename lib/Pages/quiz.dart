@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'package:quiz_flow/Pages/play_complete.dart';
 import 'package:quiz_flow/api/http_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_flow/Services/firebase_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key, required this.difficulty, required this.category});
@@ -17,7 +20,12 @@ class _QuizScreenState extends State<QuizScreen> {
   Timer? timer;
   late Future quiz;
 
-  int points = 0;
+  num points = 0;
+  num hits = 0;
+  num fails = 0;
+  num allpoints = 0;
+  num allhits = 0;
+  num allfails = 0;
 
   var isLoaded = false;
 
@@ -111,14 +119,44 @@ class _QuizScreenState extends State<QuizScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                              size: 30,
-                            )),
+                          onPressed: () => showDialog(
+                            useRootNavigator: false,
+                            context: context, 
+                            builder: (context) => AlertDialog(
+                              backgroundColor: const Color.fromARGB(255, 52, 51, 51),
+                              title: const Text("Do you want to quit?",
+                                style: TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, false);
+                                },
+                                child: const Text("Cancel",
+                                  style: TextStyle(color: Colors.red)
+                                  )
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(); Navigator.of(context).pop();
+                                  },
+                                  child: const Text("Ok",
+                                    style: TextStyle(
+                                      color: Colors.white
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 30,
+                          )
+                        ),
                         Stack(
                           alignment: Alignment.center,
                           children: [
@@ -181,17 +219,22 @@ class _QuizScreenState extends State<QuizScreen> {
                               if (answer.toString() == optionsList[index].toString()) {
                                 optionsColor[index] = Colors.green;
                                 points = points + 10;
+                                hits++;
                               } else {
                                 optionsColor[index] = Colors.red;
+                                fails++;
                               }
                               if (currentQuestionIndex < data.length - 1) {
-                                Future.delayed(const Duration(seconds: 1), () {
+                                Future.delayed(const Duration(seconds: 0), () {
                                   gotoNextQuestion();
                                 });
                               } else {
                                 timer!.cancel();
-                                //here you can do whatever you want with the results
-                              }
+                                var router = MaterialPageRoute(
+                                builder: (context) => Complete(points: points));
+                                Navigator.of(context).push(router); 
+                                //saved();
+                              } 
                             });
                           },
                           child: Container(
@@ -226,6 +269,30 @@ class _QuizScreenState extends State<QuizScreen> {
           },
         ),
       )),
-    );
+    ); 
   }
 }
+
+
+/*
+  Widget saved(){
+    return FutureBuilder(
+      future: FireStoreDataBase().getData(),
+      builder: ((context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List? dataList = snapshot.data;
+          allpoints = points + (dataList?[0]['points']);
+          allhits = hits + (dataList?[0]['hits']);
+          allfails = fails + (dataList?[0]['fails']);
+          FirebaseFirestore.instance.collection("stadistics")
+            .doc("1h01pKqWOMxuyvgpGFjP").update({
+              'points' : allpoints,
+              'hits' : allhits,
+              'fails' : allfails
+            }
+          );                              
+        } 
+        return const Center(child: CircularProgressIndicator());
+      }),       
+    );
+  } */
