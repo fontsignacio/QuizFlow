@@ -2,30 +2,32 @@ import 'dart:async';
 import 'package:quiz_flow/Pages/play_complete.dart';
 import 'package:quiz_flow/api/http_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_flow/Services/firebase_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key, required this.difficulty, required this.category});
+class QuizScreen extends StatefulWidget{
+  const QuizScreen({super.key,required this.difficulty,required this.category});
+
   final String difficulty;
-  final String category; 
+  final String category;  
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<QuizScreen>{
   var currentQuestionIndex = 0;
   int seconds = 30;
   Timer? timer;
   late Future quiz;
 
-  num points = 0;
-  num hits = 0;
-  num fails = 0;
-  num allpoints = 0;
-  num allhits = 0;
-  num allfails = 0;
+  int points = 0;
+  int hits = 0;
+  int fails = 0;
+
+  int allpoints = 0;
+  int allhits = 0;
+  int allfails = 0;
 
   var isLoaded = false;
 
@@ -39,11 +41,26 @@ class _QuizScreenState extends State<QuizScreen> {
     Colors.black54,
   ];
 
+  Future<void> savePoints(int points, int fails, int hits) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('allpoints', points);
+    await prefs.setInt('allhits', hits);
+    await prefs.setInt('allfails', fails);
+  }
+
+  Future<void> viewStadistic() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    allpoints = prefs.getInt('allpoints')!;
+    allhits = prefs.getInt('allhits')!;
+    allfails = prefs.getInt('allfails')!;
+  }
+
   @override
   void initState() {
     super.initState();
     quiz = getQuiz(widget.category,widget.difficulty);
     startTimer();
+    viewStadistic();
   }
 
   @override
@@ -225,15 +242,28 @@ class _QuizScreenState extends State<QuizScreen> {
                                 fails++;
                               }
                               if (currentQuestionIndex < data.length - 1) {
-                                Future.delayed(const Duration(seconds: 0), () {
+                                Future.delayed(const Duration(seconds: 1), () {
                                   gotoNextQuestion();
-                                });
+                                }); 
                               } else {
                                 timer!.cancel();
                                 var router = MaterialPageRoute(
                                 builder: (context) => Complete(points: points));
-                                Navigator.of(context).push(router); 
-                                //saved();
+                                Navigator.of(context).push(router);
+
+                                int count = points + allpoints;
+                                int count1 = hits + allhits;
+                                int count2 = fails + allfails;
+                                
+                                savePoints(count, count1, count2);
+
+                                FirebaseFirestore.instance.collection("stadistics")
+                                  .doc("1h01pKqWOMxuyvgpGFjP").update({
+                                    'points' : allpoints,
+                                    'hits' :  allhits,
+                                    'fails' : allfails
+                                  }
+                                );                             
                               } 
                             });
                           },
@@ -269,30 +299,6 @@ class _QuizScreenState extends State<QuizScreen> {
           },
         ),
       )),
-    ); 
+    );  
   }
-}
-
-
-/*
-  Widget saved(){
-    return FutureBuilder(
-      future: FireStoreDataBase().getData(),
-      builder: ((context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          List? dataList = snapshot.data;
-          allpoints = points + (dataList?[0]['points']);
-          allhits = hits + (dataList?[0]['hits']);
-          allfails = fails + (dataList?[0]['fails']);
-          FirebaseFirestore.instance.collection("stadistics")
-            .doc("1h01pKqWOMxuyvgpGFjP").update({
-              'points' : allpoints,
-              'hits' : allhits,
-              'fails' : allfails
-            }
-          );                              
-        } 
-        return const Center(child: CircularProgressIndicator());
-      }),       
-    );
-  } */
+}  

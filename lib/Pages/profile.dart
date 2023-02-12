@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quiz_flow/Services/auth.dart';
 import 'package:quiz_flow/Services/firebase_services.dart';
 
+// ignore: must_be_immutable
 class Profile extends StatelessWidget {
   Profile({super.key});
 
@@ -13,7 +14,7 @@ class Profile extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 15, 15, 29),
       body: Padding(
@@ -90,7 +91,7 @@ class Profile extends StatelessWidget {
                 }
                 return const Center(child: CircularProgressIndicator());
               }),       
-            )
+            ),   
           ],
         ),
       )
@@ -134,3 +135,4 @@ class Profile extends StatelessWidget {
     );
   }
 }
+
