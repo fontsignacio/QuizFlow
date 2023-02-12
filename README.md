@@ -4,12 +4,12 @@ Building in Flutter a QuizApp with [opentdb](https://opentdb.com/api_config.php)
 
 ## App Features
 
-- Login and Register
+- Log in and Register
 - 22 different categories
-- Select your Difficult
-- Recolect Points
+- Select your difficulty
+- Colect Points
 - Profile
-- Logout
+- Log out
 
 ## Screenshots
 
