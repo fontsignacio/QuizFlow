@@ -13,7 +13,7 @@ Building in Flutter a QuizApp with [opentdb](https://opentdb.com/api_config.php)
 
 ## Screenshots
 
-![app](https://user-images.githubusercontent.com/93054257/216798731-565fadab-245a-4690-939d-4e10281a00c9.jpg)
+![app](https://user-images.githubusercontent.com/93054257/218291596-61ccaa65-fb51-47cb-a5a3-9e2f60134abe.jpg)
 
 
 ## Created & Maintained By
