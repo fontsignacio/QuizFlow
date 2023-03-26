@@ -15,6 +15,12 @@ Building in Flutter a QuizApp with [opentdb](https://opentdb.com/api_config.php)
 
 ![app](https://user-images.githubusercontent.com/93054257/218291596-61ccaa65-fb51-47cb-a5a3-9e2f60134abe.jpg)
 
+## Download Link
+
+Download the application with the QR code or by the [QuizFlow link](https://drive.google.com/file/d/1U8sqmbJLHdni-xSAW7dtpy7p_M6swTyv/view?usp=share_link)
+
+![image](https://user-images.githubusercontent.com/93054257/227798943-eccaa620-ddb1-4354-ac35-e4087859a3e2.png)
+
 
 ## Created & Maintained By
 
