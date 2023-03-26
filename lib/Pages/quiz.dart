@@ -4,6 +4,7 @@ import 'package:quiz_flow/api/http_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class QuizScreen extends StatefulWidget{
   const QuizScreen({super.key,required this.difficulty,required this.category});
@@ -20,6 +21,7 @@ class _QuizScreenState extends State<QuizScreen>{
   int seconds = 30;
   Timer? timer;
   late Future quiz;
+  var unescape = HtmlUnescape();
 
   int points = 0;
   int hits = 0;
@@ -215,7 +217,7 @@ class _QuizScreenState extends State<QuizScreen>{
                           margin: const EdgeInsets.all(10),
                           padding: const EdgeInsets.all(10),
                           height: 140,
-                          child: Text(data[currentQuestionIndex]["question"],
+                          child: Text(unescape.convert(data[currentQuestionIndex]["question"]),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20
@@ -276,7 +278,7 @@ class _QuizScreenState extends State<QuizScreen>{
                               color: optionsColor[index],
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Text(optionsList[index].toString(),
+                            child: Text(unescape.convert(optionsList[index].toString()),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18

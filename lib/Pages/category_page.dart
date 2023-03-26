@@ -51,7 +51,7 @@ class _HomeState extends State<CategoryPage> {
           Padding(      
             padding: const EdgeInsets.only(right: 10),
             child: PopupMenuButton <MenuItem> (
-               onSelected: (value) => {
+              onSelected: (value) => {
                 if(value == MenuItem.item1){
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => Profile(),
@@ -115,7 +115,7 @@ class _HomeState extends State<CategoryPage> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(  
           crossAxisCount: 2,
         ),  
-        itemCount: categories.length,
+        itemCount: categoryModel.length,
         itemBuilder: (context, index) {
           final int count = index + 9;
           return Container(
@@ -135,7 +135,7 @@ class _HomeState extends State<CategoryPage> {
                     ),
                     child: ClipRRect(
                     borderRadius: BorderRadius.circular(13),
-                      child:Image.network(categoryModel[index].imgUrl,
+                      child:Image.asset(categoryModel[index].imgUrl,
                       fit: BoxFit.fill,
                       width: 160,
                       height: 133,

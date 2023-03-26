@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^4.3.1
   http: ^0.13.5
   shared_preferences: ^2.0.17
+  html_unescape: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,30 @@ flutter:
   assets:
      - assets/images/logo.png
      - assets/images/good.png
+     - assets/images/animals.jpg
+     - assets/images/anime.png
+     - assets/images/art.jpg
+     - assets/images/board.jpg
+     - assets/images/books.jpg
+     - assets/images/car.jpg
+     - assets/images/cartoon.jpg
+     - assets/images/celebrities.jpg
+     - assets/images/comic.jpg
+     - assets/images/gadgets.jpg
+     - assets/images/games.jpg
+     - assets/images/general.jpg
+     - assets/images/geography.jpg
+     - assets/images/history.jpg
+     - assets/images/math.jpg
+     - assets/images/movie.jpg
+     - assets/images/music.jpg
+     - assets/images/musical.jpg
+     - assets/images/mythology.jpg
+     - assets/images/pc.jpg
+     - assets/images/politic.jpg
+     - assets/images/science.jpg
+     - assets/images/sports.jpg
+     - assets/images/tv.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

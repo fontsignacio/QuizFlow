@@ -1,0 +1,6 @@
+{
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "cSpell.enableFiletypes": [
+        "dart"
+    ]
+}
