@@ -5,7 +5,7 @@ Building in Flutter a QuizApp with [opentdb](https://opentdb.com/api_config.php)
 ## App Features
 
 - Log in and Register
-- 22 different categories
+- 24 different categories
 - Select your difficulty
 - Colect Points
 - Profile
@@ -17,7 +17,7 @@ Building in Flutter a QuizApp with [opentdb](https://opentdb.com/api_config.php)
 
 ## Download Link
 
-Download the application with the QR code or by the [QuizFlow link](https://drive.google.com/file/d/1U8sqmbJLHdni-xSAW7dtpy7p_M6swTyv/view?usp=share_link)
+Download the application with the QR code or by the [QuizFlow link](https://drive.google.com/file/d/1U8sqmbJLHdni-xSAW7dtpy7p_M6swTyv/view?usp=share_link). Disable application security protocol.
 
 ![image](https://user-images.githubusercontent.com/93054257/227798943-eccaa620-ddb1-4354-ac35-e4087859a3e2.png)
 
