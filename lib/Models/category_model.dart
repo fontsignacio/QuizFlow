@@ -65,6 +65,9 @@ List<CategoryModel> categoryModel = [
     imgUrl: "assets/images/car.jpg"
   ),
   CategoryModel(
+    imgUrl: "assets/images/comic.jpg"
+  ),
+  CategoryModel(
     imgUrl: "assets/images/gadgets.jpg"
   ),
   CategoryModel(

@@ -72,8 +72,9 @@ class _HomeState extends State<CategoryPage> {
                   value:  MenuItem.item1,
                   child: Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 35, top: 10),                          
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(top: 10),                          
                         child: CircleAvatar(  
                         radius: 60,                
                         child: ClipRRect(
@@ -82,8 +83,9 @@ class _HomeState extends State<CategoryPage> {
                         ),
                       ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 140, left: 20, bottom: 20),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(top: 140, bottom: 20),
                         child: Text(user?.email ?? '', 
                           style: const TextStyle(
                             color: Colors.white

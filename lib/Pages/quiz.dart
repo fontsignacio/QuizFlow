@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:quiz_flow/Pages/error.dart';
 import 'package:quiz_flow/Pages/play_complete.dart';
 import 'package:quiz_flow/api/http_handler.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,8 @@ class _QuizScreenState extends State<QuizScreen>{
       setState(() {
         if (seconds > 0) {
           seconds--;
-        } else {
+        }
+        else {
           gotoNextQuestion();
         }
       });
@@ -124,6 +126,10 @@ class _QuizScreenState extends State<QuizScreen>{
             if (snapshot.hasData) {
               var data = snapshot.data["results"];
 
+              if (data.isEmpty){
+                return const Error();
+              }
+
               if (isLoaded == false) {
                 optionsList = data[currentQuestionIndex]["incorrect_answers"];
                 optionsList.add(data[currentQuestionIndex]["correct_answer"]);
@@ -159,7 +165,9 @@ class _QuizScreenState extends State<QuizScreen>{
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(); Navigator.of(context).pop();
+                                    Navigator.of(context).pop(); 
+                                    Navigator.of(context).pop(); 
+                                    Navigator.of(context).pop(); 
                                   },
                                   child: const Text("Ok",
                                     style: TextStyle(
@@ -241,13 +249,21 @@ class _QuizScreenState extends State<QuizScreen>{
                                 hits++;
                               } else {
                                 optionsColor[index] = Colors.red;
+
+                                for (int i = 0; i <= 3; i++){
+                                  if (answer.toString() == optionsList[i].toString()){
+                                    optionsColor[i] = Colors.green;
+                                    i == 0;
+                                  }
+                                }
+
                                 fails++;
                               }
                               if (currentQuestionIndex < data.length - 1) {
-                                Future.delayed(const Duration(seconds: 1), () {
+                                Future.delayed(const Duration(milliseconds: 500), () {
                                   gotoNextQuestion();
                                 }); 
-                              } else {
+                              }else {
                                 timer!.cancel();
                                 var router = MaterialPageRoute(
                                 builder: (context) => Complete(points: points));

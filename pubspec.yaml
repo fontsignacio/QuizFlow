@@ -114,6 +114,7 @@ flutter:
      - assets/images/science.jpg
      - assets/images/sports.jpg
      - assets/images/tv.jpg
+     - assets/images/error.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

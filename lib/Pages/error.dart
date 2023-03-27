@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Complete extends StatelessWidget {
-  const Complete({super.key, required this.points});
-  final num points;
+class Error extends StatelessWidget {
+  const Error({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 15, 15, 29),
+      backgroundColor: Colors.white.withOpacity(0),
       body: Padding(
         padding:const  EdgeInsets.all(10),
         child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.only(left:20, top: 50),
-              child:Image.asset('assets/images/good.png',
+              child:Image.asset('assets/images/error.png',
                 height: 300,
                 scale: 1,
               )
@@ -22,18 +21,18 @@ class Complete extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(top: 10),
-              child: const Text("Good Work",
+              child: const Text("ERROR",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.redAccent,
                   fontSize: 30
                 ),
               )
             ),
             Container(
               alignment: Alignment.center,
-              child: Text("+${points.toString()} points",
-                style: const TextStyle(
-                  color: Colors.lightGreen,
+              child: const Text("This level is incomplete,\n   select other difficulty.",
+                style: TextStyle(
+                  color: Colors.white,
                   fontSize: 20
                 ),
               )
@@ -42,15 +41,13 @@ class Complete extends StatelessWidget {
               alignment: Alignment.center,
               padding: EdgeInsets.only(top: 20),
               child: ElevatedButton(
-                child: const Text("Continue",
+                child: const Text("Back",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
                   Navigator.of(context).pop();
                 },
               ),
